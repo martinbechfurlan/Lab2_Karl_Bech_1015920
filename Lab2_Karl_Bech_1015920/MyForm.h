@@ -900,10 +900,13 @@ private: System::Windows::Forms::Label^ label12;
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button1);
+			this->KeyPreview = true;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::MyForm_KeyDown);
+			this->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &MyForm::MyForm_KeyPress);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -928,6 +931,11 @@ private: System::Windows::Forms::Label^ label12;
 		dataGridView1->Rows->Add(2);
 		dataGridView1->Rows[yc]->Cells[xc]->Value = "C";
 		dataGridView1->Rows[yt]->Cells[xt]->Value = "T";
+
+
+
+
+
 	}
 	public: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
@@ -939,7 +947,7 @@ private: System::Windows::Forms::Label^ label12;
 	}
 public: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 	
-	
+	srand(time(NULL));
 	num = rand() % (11 - 1);
 	num2 = num;
 	label2->Text = "" + num;
@@ -1363,6 +1371,17 @@ public: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 	mord = Convert::ToString(mordidas);
 	label4->Text = min + ":" + sec;
 	label10->Text = mord;
+}
+private: System::Void MyForm_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+}
+
+private: System::Void MyForm_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+
+
+	if (e->KeyCode == Keys::R)
+	{
+		MessageBox::Show("EMPATE!", "Por favor presione el botón de reinicio!", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
 }
 };
 }
